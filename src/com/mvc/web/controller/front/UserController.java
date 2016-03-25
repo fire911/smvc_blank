@@ -12,12 +12,18 @@ import com.mvc.web.model.Users;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-//	Logger log=Logger.getLogger(UserController.class);
-	Logger log=LoggerFactory.getLogger(UserController.class);
 	
-	@RequestMapping("login")
-	public String login(HttpServletRequest request, Users user) {
-		log.info(request.getParameter("username")+"***********//");
+	Logger log = LoggerFactory.getLogger(UserController.class);
+	
+	/**
+	 * 登陆
+	 * @param request
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("home")
+	public String home(HttpServletRequest request, Users user) {
+		log.info(request.getParameter("username"));
 		if ("admin".equals(user.getUsername())
 				&& "admin".equals(user.getPassword())) {
 			return "front/home";

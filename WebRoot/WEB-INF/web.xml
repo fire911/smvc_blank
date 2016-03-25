@@ -13,13 +13,13 @@
 		<param-name>webAppRootKey</param-name>
 		<param-value>smvc_blank.root</param-value>
 	</context-param>
-	
-<!-- 	<context-param> -->
-		<!-- log4j 配置扫描刷新间隔 可以不用 -->
-<!-- 		<param-name>log4jRefreshInterval</param-name> -->
-<!-- 		<param-value>10000</param-value> -->
-<!-- 	</context-param> -->
-	
+
+	<!-- <context-param> -->
+	<!-- log4j 配置扫描刷新间隔 可以不用 -->
+	<!-- <param-name>log4jRefreshInterval</param-name> -->
+	<!-- <param-value>10000</param-value> -->
+	<!-- </context-param> -->
+
 	<listener>
 		<description>spring log4j监听器</description>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
@@ -52,6 +52,16 @@
 	</servlet-mapping>
 
 	<filter>
+		<description>spring security</description>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
 		<description>字符集过滤器</description>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -68,6 +78,10 @@
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>
+	<!-- <error-page> <error-code>404</error-code> <location>/common/404.jsp</location> 
+		</error-page> <error-page> <error-code>403</error-code> <location>/common/403.jsp</location> 
+		</error-page> <error-page> <error-code>500</error-code> <location>/common/500.jsp</location> 
+		</error-page> -->
 	<welcome-file-list>
 		<welcome-file>/login.jsp</welcome-file>
 	</welcome-file-list>

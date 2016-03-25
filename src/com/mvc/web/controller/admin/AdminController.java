@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("admin")
 public class AdminController {
 	
 	Logger log=LoggerFactory.getLogger(AdminController.class);
@@ -18,7 +18,7 @@ public class AdminController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping
+	@RequestMapping("/login")
 	public String toLoginPage(HttpServletRequest request) {
 		return "admin/login";
 	}
