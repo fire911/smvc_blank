@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.mvc.web.exception.SessionTimeoutException;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
@@ -37,11 +36,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		String requestUrl = request.getRequestURI().replace(
 				request.getContextPath(), "");
 		log.info("requestUrl:"+requestUrl);
-//		for (String url : noInterceptorUrls) {
-//			if (requestUrl.contains(url)) {
-//				return true;
-//			}
-//		}
+		for (String url : noInterceptorUrls) {
+			if (requestUrl.contains(url)) {
+				return true;
+			}
+		}
 		String user = null;
 		if (requestUrl.contains("admin")) {
 			user = (String) request.getSession().getAttribute("admin");
@@ -62,13 +61,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		} else {
 			// //普通请求拦截
 			if (user == null) {
-				log.info("Interceptor：跳转到login页面！");
 				if (requestUrl.contains("admin")) {
 //					throw new SessionTimeoutException();
-					response.sendRedirect(request.getContextPath() + "/admin");
+					log.info("Interceptor：跳转到后台登陆页面！");
+					response.sendRedirect(request.getContextPath() + "/admin/login");
 				} else {
+					log.info("Interceptor：跳转到前台登陆页面！");
 //					throw new SessionTimeoutException();
-					response.sendRedirect(request.getContextPath());
+					response.sendRedirect(request.getContextPath()+ "/");
 				}
 			}
 		}
