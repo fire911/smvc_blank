@@ -2,7 +2,7 @@ package com.mvc.web.model;
 
 import java.util.Date;
 
-public class Users {
+public class Admin {
 
 	private Integer id;
 

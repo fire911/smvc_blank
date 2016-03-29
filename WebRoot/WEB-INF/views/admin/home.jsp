@@ -22,7 +22,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   </head>
   
-  <body>
-    ADMIN HOME <br>
+  <body>${admin.username}/${admin.password}<br>
   </body>
 </html>

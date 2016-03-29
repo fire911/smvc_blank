@@ -41,35 +41,24 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				return true;
 			}
 		}
-		String user = null;
-		if (requestUrl.contains("admin")) {
-			user = (String) request.getSession().getAttribute("admin");
-		} else {
-			user = (String) request.getSession().getAttribute("user");
-		}
+		String admin = (String) request.getSession().getAttribute("admin");
 
 		// String user=(String) session.getAttribute("user");
 		String requestType = request.getHeader("X-Requested-With");
 		if (requestType != null
 				&& "XMLHttpRequest".equalsIgnoreCase(requestType)) {
 			log.info("ajax请求");
-			if (user == null) {
+			if (admin == null) {
 				// 未登录 跳转到登录页面
 				response.setHeader("sessionstatus", "timeout");
 				return false;
 			}
 		} else {
 			// //普通请求拦截
-			if (user == null) {
-				if (requestUrl.contains("admin")) {
-//					throw new SessionTimeoutException();
-					log.info("Interceptor：跳转到后台登陆页面！");
-					response.sendRedirect(request.getContextPath() + "/admin/login");
-				} else {
-					log.info("Interceptor：跳转到前台登陆页面！");
+			if (admin == null) {
+					log.info("Interceptor：跳转到登陆页面！");
 //					throw new SessionTimeoutException();
 					response.sendRedirect(request.getContextPath()+ "/");
-				}
 			}
 		}
 		return true;

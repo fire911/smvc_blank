@@ -13,35 +13,49 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
+	<mvc:annotation-driven />
 	<!-- 资源访问处理器 -->
-	<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
-	<mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
-	<mvc:resources location="/images/" mapping="/images/**"></mvc:resources>
+	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+	<!-- <mvc:default-servlet-handler /> -->
+
 	<!-- 使用注解 -->
 	<mvc:annotation-driven>
-		<!-- 配置返回类型 -->
-		<mvc:message-converters>
-			<bean id="mappingJacksonHttpMessageConverter"
-				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-				<property name="supportedMediaTypes">
-					<list>
-						<value>application/json;charset=UTF-8</value>
-						<value>text/html;charset=UTF-8</value>
-					</list>
-				</property>
-			</bean>
-			<bean
-				class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
-			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
-				<property name="supportedMediaTypes">
-					<list>
-						<value>text/plain;charset=UTF-8</value>
-						<value>text/html;charset=UTF-8</value>
-					</list>
-				</property>
-			</bean>
-		</mvc:message-converters>
+		<!-- <mvc:message-converters> <bean id="mappingJacksonHttpMessageConverter" 
+			class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> 
+			<property name="supportedMediaTypes"> <list> <value>application/json;charset=UTF-8</value> 
+			<value>text/html;charset=UTF-8</value> </list> </property> </bean> <bean 
+			class="org.springframework.http.converter.ByteArrayHttpMessageConverter" 
+			/> <bean class="org.springframework.http.converter.StringHttpMessageConverter"> 
+			<property name="supportedMediaTypes"> <list> <value>text/plain;charset=UTF-8</value> 
+			<value>text/html;charset=UTF-8</value> </list> </property> </bean> </mvc:message-converters> -->
 	</mvc:annotation-driven>
+	<bean id="contentNegotiationManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json" />
+				<entry key="xml" value="application/xml" />
+				<entry key="htm" value="text/html" />
+			</map>
+			<!-- <props> <prop key="json">application/json;charset=utf-8</prop> <prop 
+				key="xml">application/xml;charset=utf-8</prop> <prop key="htm">text/html;charset=utf-8</prop> 
+				</props> -->
+		</property>
+		<property name="ignoreAcceptHeader" value="true" />
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="order" value="1" />
+		<property name="contentNegotiationManager" ref="contentNegotiationManager"></property>
+		<property name="defaultViews">
+			<list>
+				<!-- JSON View -->
+				<bean
+					class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+				</bean>
+			</list>
+		</property>
+	</bean>
 
 	<!-- 视图处理器 -->
 	<bean id="internalResourceViewResolver"
@@ -54,7 +68,7 @@
 	<!-- 拦截器 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/*/*" />
+			<mvc:mapping path="/admin/*" />
 			<ref bean="loginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
@@ -70,4 +84,5 @@
 	</bean>
 
 	<mvc:view-controller path="/" view-name="login" />
+
 </beans>
