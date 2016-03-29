@@ -14,22 +14,26 @@
 	<script type="text/javascript">
 	$(function(){
 		$("#sub").bind("click",function(){
-// 			var param={};
-// 			param["username"]=$("#username").val();
-// 			param["password"]=$("#password").val();
-// 			alert(JSON.stringify(param));
-// 			$.ajax({
-// 				url:"${ctx}/admin/login",
-// 				type:"post",
-// 				dataType:"json",
-// 				contentType:"application/json",  
-// 				data:JSON.stringify(param),
-// 				success:function(data){
-// 					alert(data.username);
+// 			var param={
+// 				username:$("#username").val(),
+// 				password:$("#password").val(),
+// 				admin:{
+// 					username:$("#username").val(),
+// 					password:$("#password").val()
 // 				}
+// 			};
+			$.ajax({
+				url:"${ctx}/admin/login",
+				type:"post",
+				dataType:"json",
+// 				contentType:"application/json",  
+				data:$("#form1").serialize(),
+				success:function(data){
+					alert(data.username);
+				}
 				
-// 			});
-			$("form").submit();
+			});
+// 			$("form").submit();
 		});
 	});
 		
@@ -37,7 +41,7 @@
   </head>
   
   <body>
-    <form action="${ctx}/admin/login" method="post">
+    <form action="${ctx}/admin/login" method="post" id="form1">
     	<label>
     		用户名：
     	</label>
@@ -46,6 +50,10 @@
     		密码：
     	</label>
     	<input type="password" name="password" id="password"><br>
+    	<label>
+    		邮箱：
+    	</label>
+    	<input type="text" name="email" id="email"><br>
 		<input id="sub" type="button" value="登陆">
     </form>
   </body>

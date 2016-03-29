@@ -10,7 +10,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
-	private String[] noInterceptorUrls = { "/login" };
+	private String[] noInterceptorUrls = { "/login","/upload" };
 
 	private Logger log = LoggerFactory.getLogger(LoginInterceptor.class);
 
