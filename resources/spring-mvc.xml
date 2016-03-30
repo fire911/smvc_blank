@@ -19,7 +19,7 @@
 	<!-- <mvc:default-servlet-handler /> -->
 
 	<!-- 使用注解 -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven/>
 
 	<bean id="contentNegotiationManager"
 		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
@@ -80,7 +80,7 @@
 		<property name="defaultEncoding" value="UTF-8" />
 		<property name="resolveLazily" value="true" />
 	</bean>
-	
+
 	<mvc:view-controller path="/" view-name="login" />
 
 </beans>

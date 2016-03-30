@@ -2,6 +2,8 @@ package com.mvc.web.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
 import com.mvc.web.model.Admin;
 
 
@@ -27,8 +30,9 @@ public class AdminController {
 	
 	@ResponseBody
 	@RequestMapping("login")
-	public Object login(String username,String password,Admin admin) {
+	public Object login(String username,String password) {
 		log.debug("管理员登录："+username);
+//		Admin adminObj=JSON.parseObject(admin, Admin.class);
 		return null;
 	}
 //	

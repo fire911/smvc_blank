@@ -1,6 +1,7 @@
 package com.mvc.web.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Admin {
 
@@ -15,6 +16,8 @@ public class Admin {
 	private Date createTime;
 
 	private String lastLoginId;
+	
+	private List<Role> lists;
 
 	/**
 	 * @return the id
@@ -106,4 +109,19 @@ public class Admin {
 		this.lastLoginId = lastLoginId;
 	}
 
+	/**
+	 * @return the lists
+	 */
+	public List<Role> getLists() {
+		return lists;
+	}
+
+	/**
+	 * @param lists the lists to set
+	 */
+	public void setLists(List<Role> lists) {
+		this.lists = lists;
+	}
+
+	
 }
